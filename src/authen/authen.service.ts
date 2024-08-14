@@ -35,7 +35,7 @@ export class AuthenService {
       throw new UnauthorizedException("Credentials are not valid")
     }
 
-    const payload = { email: loginDto.email };
+    const payload = { email: user.email, roles: user.roles };
     const token = await this.jwtService.signAsync(payload)
 
     return {
