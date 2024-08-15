@@ -25,7 +25,7 @@ export class AuthenService {
   }
 
   async login(loginDto: LoginDto) {
-    const user = await this.userService.findOneByEmail(loginDto.email);
+    const user = await this.userService.findByEmailWithPassword(loginDto.email);
 
     if (!user) {
       throw new UnauthorizedException("Credentials are not valid")

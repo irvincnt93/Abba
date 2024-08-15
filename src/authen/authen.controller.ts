@@ -5,6 +5,8 @@ import { LoginDto } from './dto/login.dto';
 import { AuthenGuard } from './guard/authen.guard';
 import { Request } from 'express';
 import { RolesGuard } from './guard/roles.guard';
+import { ValidRoles } from './interfaces/valid-roles';
+import { AuthRoles } from './decorators/authRoles.decorators';
 
 interface RequestUser extends Request {
   user: { user: string, roles: string[]}
@@ -31,9 +33,8 @@ export class AuthenController {
   }
 
   @Get('profile')
-  @SetMetadata('roles', ['admin', 'user'])
-  @UseGuards(AuthenGuard, RolesGuard)
-  profile(@Req() req: RequestUser) {
+  @AuthRoles(ValidRoles.admin, ValidRoles.user)
+  profilee(@Req() req: RequestUser) {
     return req.user
   }
 }

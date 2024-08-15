@@ -10,7 +10,7 @@ export class RolesGuard implements CanActivate {
     const requiredRoles = this.reflector.getAllAndOverride("roles", [
       context.getHandler(),
       context.getClass(),
-    ]);
+    ]);    
 
     // without roles and empty array roles return true
     if (!requiredRoles) return true
